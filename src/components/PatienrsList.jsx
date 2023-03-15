@@ -12,6 +12,7 @@ function PatienrsList({patients}) {
 
       {patients.map((patient)=>
         <Patient
+        key={patient.id}
         patient={patient}
         />
       )}
