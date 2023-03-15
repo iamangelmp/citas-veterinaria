@@ -1,6 +1,13 @@
-function Patient({ patient, setPatient }) {
+function Patient({ patient, setPatient, deletePatient }) {
+  const { nombreMascota, nombreProp, email, fecha, sintomas, id } = patient;
 
-  const { nombreMascota, nombreProp, email, fecha, sintomas } = patient;
+  function handleDelete() {
+    const confirmation = confirm('Deseas eliminar este paciente?');
+    if(confirmation){
+      deletePatient(id);
+    }
+  }
+
   return (
     <div>
       <div className="m-3 bg-white shadow-md px-5 py-10 rounded-md">
@@ -25,7 +32,7 @@ function Patient({ patient, setPatient }) {
         </p>
 
         <p className="font-bold mb-3 text-gray-700 uppercase">
-          Sintoma s: {""}
+          Sintomas: {""}
           <span className="font-normal normal-case">{sintomas}</span>
         </p>
 
@@ -33,14 +40,18 @@ function Patient({ patient, setPatient }) {
           <button
             className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-md"
             type="button"
-            onClick={()=>setPatient(patient)}
+            onClick={() => setPatient(patient)}
           >
             Editar
           </button>
 
-          <button 
-          className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-md"
-          type="button">Eliminar</button>
+          <button
+            className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-md"
+            type="button"
+            onClick={handleDelete}
+          >
+            Eliminar
+          </button>
         </div>
       </div>
     </div>

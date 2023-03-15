@@ -1,6 +1,5 @@
 import Error from "./Error";
 import { useState, useEffect } from "react";
-import { Particle } from "aframe";
 
 function Form({ patients, setPatients, patient, setPatient }) {
   const [nombreMascota, setNombreMascota] = useState("");
@@ -20,10 +19,6 @@ function Form({ patients, setPatients, patient, setPatient }) {
     }
   }, [patient]);
 
-  if (patient.id) {
-    //editando el registro
-  }
-
   function generateId() {
     const random = Math.random().toString(36).substr(2);
     const fecha = Date.now().toString(36);
@@ -38,8 +33,9 @@ function Form({ patients, setPatients, patient, setPatient }) {
       return setErrores(true);
     }
 
+    setErrores(false);
+
     const dataObj = {
-      //id: generateId(),
       nombreMascota,
       nombreProp,
       email,
@@ -50,23 +46,20 @@ function Form({ patients, setPatients, patient, setPatient }) {
     if (patient.id) {
       //editando el registro
       dataObj.id = patient.id;
-      console.log(dataObj);
-      console.log(patient);
 
       const updatedPatient = patients.map((patientState) =>
         patientState.id === patient.id ? dataObj : patientState
       );
       setPatients(updatedPatient);
       setPatient({});
+
     } else {
       dataObj.id = generateId();
       setPatients([...patients, dataObj]);
+
     }
 
-    setErrores(false);
-
-    //Reinicia forms
-    //setPatients([...patients, dataObj]);
+      //Reinicia forms
     setNombreMascota("");
     setNombreProp("");
     setEmail("");
