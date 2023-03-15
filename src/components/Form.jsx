@@ -9,6 +9,13 @@ function Form({patients, setPatients}) {
   const [sintomas, setSintomas] = useState('');
   const [error, setErrores] = useState(false);
 
+  function generateId(){
+    const random = Math.random().toString(36).substr(2);
+    const fecha = Date.now().toString(36);
+
+    return random + fecha;
+  }
+
   function handleSubmit(e){
     e.preventDefault();
     if([nombreMascota,nombreProp,email,fecha,sintomas].includes('')){
@@ -17,6 +24,7 @@ function Form({patients, setPatients}) {
     }
 
     const dataObj ={
+      id: generateId(),
       nombreMascota,
       nombreProp,
       email,
@@ -26,7 +34,7 @@ function Form({patients, setPatients}) {
 
     setErrores(false);
     setPatients([...patients, dataObj]);
-    
+
   }
 
   return (
