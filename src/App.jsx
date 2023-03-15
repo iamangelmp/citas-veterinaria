@@ -6,6 +6,7 @@ import PatienrsList from "./components/PatienrsList";
 function App() {
 
   const[patients,setPatients] = useState([]);
+  const[patient, setPatient] = useState({});
 
   return (
     <div className="container mx-auto mt-20">
@@ -14,9 +15,11 @@ function App() {
         <Form 
           patients={patients}
           setPatients={setPatients}
+          patient={patient}
         />
         <PatienrsList
           patients={patients}
+          setPatient={setPatient}
         />
       </div>
     </div>
