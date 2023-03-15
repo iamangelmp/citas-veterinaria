@@ -1,6 +1,7 @@
+import Error from './Error';
 import { useState, useEffect} from 'react';
 
-function Form() {
+function Form({patients, setPatients}) {
   const [nombreMascota, setNombreMascota] = useState('');
   const [nombreProp, setNombreProp] = useState('');
   const [email, setEmail] = useState('');
@@ -15,7 +16,17 @@ function Form() {
       return setErrores(true);
     }
 
+    const dataObj ={
+      nombreMascota,
+      nombreProp,
+      email,
+      fecha,
+      sintomas
+    }
+
     setErrores(false);
+    setPatients([...patients, dataObj]);
+    
   }
 
   return (
@@ -28,9 +39,7 @@ function Form() {
       </p>
 
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 mx-5">
-        {error && (<div className='bg-red-800 text-white text-center p-4 mb-4 rounded-md'>
-          <p> Todos los campos son obligatorios</p>
-        </div>)}
+        {error && <Error msj='Todos los campos son obligatorios'/>}
 
         <div className="mb-5">
           <label htmlFor="nombre_mascota" className="block text-gray-700 font-bold uppercase">
